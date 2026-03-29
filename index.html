@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知行驿站 - 科普活动服务平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0066FF',
+                        secondary: '#00D4AA',
+                        accent: '#FF6B35',
+                        light: '#F0F7FF',
+                        dark: '#1A1F36'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-white font-sans antialiased">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <span
+                        class="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">知行驿站</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="index.html" class="text-primary font-semibold px-4 py-2 transition-colors">首页</a>
+
+                    <div class="dropdown relative">
+                        <button
+                            class="flex items-center space-x-1 text-gray-600 hover:text-primary transition-colors font-medium px-4 py-2">
+                            <span>科普服务</span>
+                            <svg class="w-4 h-4 dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div
+                            class="dropdown-menu absolute top-full left-0 mt-1 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2">
+                            <a href="#"
+                                class="block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    <span>科普标准</span>
+                                </span>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                    <span>资源下载</span>
+                                </span>
+                            </a>
+                            <a href="#experts"
+                                class="block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
+                                    <span>科普专家库</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown relative">
+                        <button
+                            class="flex items-center space-x-1 text-gray-600 hover:text-primary transition-colors font-medium px-4 py-2">
+                            <span>活动支持</span>
+                            <svg class="w-4 h-4 dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div
+                            class="dropdown-menu absolute top-full left-0 mt-1 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2">
+                            <a href="#"
+                                class="block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    <span>工具支持</span>
+                                </span>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                    </svg>
+                                    <span>供需对接</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown relative">
+                        <button
+                            class="flex items-center space-x-1 text-gray-600 hover:text-primary transition-colors font-medium px-4 py-2">
+                            <span>科普认证</span>
+                            <svg class="w-4 h-4 dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div
+                            class="dropdown-menu absolute top-full left-0 mt-1 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2">
+                            <a href="#"
+                                class="block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                    <span>展示类</span>
+                                </span>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    </svg>
+                                    <span>培训类</span>
+                                </span>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                                    </svg>
+                                    <span>交流类</span>
+                                </span>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                    </svg>
+                                    <span>竞赛类</span>
+                                </span>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span>体验类</span>
+                                </span>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                                    </svg>
+                                    <span>演艺类</span>
+                                </span>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                                    </svg>
+                                    <span>其他类</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <a href="#"
+                        class="text-gray-600 hover:text-primary transition-colors font-medium px-4 py-2">关于我们</a>
+
+                    <a href="login.html"
+                        class="bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full font-medium hover:shadow-lg hover:shadow-primary/30 transition-all transform hover:-translate-y-0.5">
+                        登录注册
+                    </a>
+                </div>
+                <button class="md:hidden p-2" id="mobile-menu-btn">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="md:hidden hidden bg-white border-t border-gray-100" id="mobile-menu">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block text-primary font-semibold py-2">首页</a>
+                <div class="space-y-2">
+                    <p class="text-gray-400 text-sm font-medium">科普服务</p>
+                    <a href="#" class="block text-gray-600 hover:text-primary transition-colors pl-4 py-1">科普标准</a>
+                    <a href="#" class="block text-gray-600 hover:text-primary transition-colors pl-4 py-1">资源下载</a>
+                    <a href="#experts"
+                        class="block text-gray-600 hover:text-primary transition-colors pl-4 py-1">科普专家库</a>
+                </div>
+                <div class="space-y-2">
+                    <p class="text-gray-400 text-sm font-medium">活动支持</p>
+                    <a href="#" class="block text-gray-600 hover:text-primary transition-colors pl-4 py-1">工具支持</a>
+                    <a href="#" class="block text-gray-600 hover:text-primary transition-colors pl-4 py-1">供需对接</a>
+                </div>
+                <div class="space-y-2">
+                    <p class="text-gray-400 text-sm font-medium">科普认证</p>
+                    <a href="#" class="block text-gray-600 hover:text-primary transition-colors pl-4 py-1">展示类</a>
+                    <a href="#" class="block text-gray-600 hover:text-primary transition-colors pl-4 py-1">培训类</a>
+                    <a href="#" class="block text-gray-600 hover:text-primary transition-colors pl-4 py-1">交流类</a>
+                    <a href="#" class="block text-gray-600 hover:text-primary transition-colors pl-4 py-1">竞赛类</a>
+                    <a href="#" class="block text-gray-600 hover:text-primary transition-colors pl-4 py-1">体验类</a>
+                    <a href="#" class="block text-gray-600 hover:text-primary transition-colors pl-4 py-1">演艺类</a>
+                    <a href="#" class="block text-gray-600 hover:text-primary transition-colors pl-4 py-1">其他类</a>
+                </div>
+                <a href="#" class="block text-gray-600 hover:text-primary transition-colors py-2">关于我们</a>
+                <a href="login.html"
+                    class="w-full bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full font-medium">
+                    登录注册
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-cyan-50"></div>
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+            <div class="floating-shape shape-4"></div>
+            <div class="grid-pattern absolute inset-0 opacity-30"></div>
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div
+                class="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-primary/20 mb-8 animate-fade-in">
+                <span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+                <span class="text-sm text-gray-600">全国科普活动服务平台</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold text-dark mb-6 animate-slide-up">
+                知行驿站
+                <span
+                    class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">科普服务</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto animate-slide-up-delay">
+                汇聚科普资源，连接供需双方，提供全方位科普活动服务支持
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up-delay-2">
+                <button
+                    class="group bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-primary/30 transition-all transform hover:-translate-y-1 flex items-center space-x-2">
+                    <span>探索服务</span>
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </button>
+                <button
+                    class="bg-white text-primary px-8 py-4 rounded-full font-semibold text-lg border-2 border-primary/20 hover:border-primary hover:shadow-lg transition-all">
+                    了解更多
+                </button>
+            </div>
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-primary counter" data-target="1200">0</div>
+                    <div class="text-gray-500 mt-1">科普标准</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-secondary counter" data-target="500">0</div>
+                    <div class="text-gray-500 mt-1">科普专家</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-accent counter" data-target="800">0</div>
+                    <div class="text-gray-500 mt-1">活动认证</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-primary counter" data-target="50000">0</div>
+                    <div class="text-gray-500 mt-1">服务人次</div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-gradient-to-b from-white to-blue-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span
+                    class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">科普服务</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-dark mb-4">全方位科普服务</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">提供标准化、专业化的科普服务支持体系</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div
+                    class="service-card group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-primary to-blue-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark mb-3">科普标准</h3>
+                    <p class="text-gray-600 mb-6">GB/T 32844-2025科普资源分类与代码等国家标准，为科普活动提供规范化指导</p>
+                    <a href="#"
+                        class="inline-flex items-center text-primary font-semibold group-hover:translate-x-2 transition-transform">
+                        查看标准
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div
+                    class="service-card group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-secondary to-cyan-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark mb-3">资源下载</h3>
+                    <p class="text-gray-600 mb-6">丰富的科普资源库，包括科普图书、视频、实验器材等，支持在线下载使用</p>
+                    <a href="#"
+                        class="inline-flex items-center text-secondary font-semibold group-hover:translate-x-2 transition-transform">
+                        浏览资源
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div
+                    class="service-card group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-accent to-orange-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark mb-3">科普专家库</h3>
+                    <p class="text-gray-600 mb-6">汇聚各领域顶尖科普专家，为科普活动提供专业支持和智力保障</p>
+                    <a href="#experts"
+                        class="inline-flex items-center text-accent font-semibold group-hover:translate-x-2 transition-transform">
+                        查看专家
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certification" class="py-24 bg-white relative overflow-hidden">
+        <div
+            class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-full blur-3xl">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-secondary/5 to-accent/5 rounded-full blur-3xl">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center mb-16">
+                <span
+                    class="inline-block bg-secondary/10 text-secondary px-4 py-2 rounded-full text-sm font-semibold mb-4">科普认证</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-dark mb-4">七类科普活动认证</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">全面覆盖各类科普活动形式，提供专业认证服务</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div
+                    class="cert-card group p-6 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100 hover:border-primary/30 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-br from-primary to-blue-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark mb-2">展示类</h3>
+                    <p class="text-gray-600 text-sm">科技展览、成果展示等活动</p>
+                </div>
+
+                <div
+                    class="cert-card group p-6 bg-gradient-to-br from-cyan-50 to-white rounded-2xl border border-cyan-100 hover:border-secondary/30 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-br from-secondary to-cyan-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark mb-2">培训类</h3>
+                    <p class="text-gray-600 text-sm">科普培训、技能培训等活动</p>
+                </div>
+
+                <div
+                    class="cert-card group p-6 bg-gradient-to-br from-orange-50 to-white rounded-2xl border border-orange-100 hover:border-accent/30 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-br from-accent to-orange-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark mb-2">交流类</h3>
+                    <p class="text-gray-600 text-sm">科普论坛、学术研讨等活动</p>
+                </div>
+
+                <div
+                    class="cert-card group p-6 bg-gradient-to-br from-purple-50 to-white rounded-2xl border border-purple-100 hover:border-purple-400/30 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark mb-2">竞赛类</h3>
+                    <p class="text-gray-600 text-sm">科普竞赛、知识竞赛等活动</p>
+                </div>
+
+                <div
+                    class="cert-card group p-6 bg-gradient-to-br from-pink-50 to-white rounded-2xl border border-pink-100 hover:border-pink-400/30 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark mb-2">体验类</h3>
+                    <p class="text-gray-600 text-sm">科普体验、互动体验等活动</p>
+                </div>
+
+                <div
+                    class="cert-card group p-6 bg-gradient-to-br from-indigo-50 to-white rounded-2xl border border-indigo-100 hover:border-indigo-400/30 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark mb-2">演艺类</h3>
+                    <p class="text-gray-600 text-sm">科普演艺、科普剧等活动</p>
+                </div>
+
+                <div
+                    class="cert-card group p-6 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200 hover:border-gray-400/30 hover:shadow-xl transition-all duration-300 cursor-pointer md:col-span-2 lg:col-span-2">
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-gray-500 to-gray-400 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-dark mb-2">其他类</h3>
+                            <p class="text-gray-600 text-sm">其他形式的科普活动，如科普研学、科普旅游等创新形式</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experts" class="py-24 bg-gradient-to-b from-blue-50/50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span
+                    class="inline-block bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-semibold mb-4">科普专家库</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-dark mb-4">权威科普专家</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">汇聚各领域顶尖科学家与科普工作者，传播科学知识</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div
+                    class="expert-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+                            王
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-dark mb-1">王渝生</h3>
+                            <p class="text-primary text-sm font-semibold mb-2">理学博士、教授、博士生导师</p>
+                            <p class="text-gray-600 text-sm line-clamp-3">
+                                1943年重庆生人，1966年毕业于四川师范大学数学系，1981年毕业于中国科学院研究生院，德国慕尼黑大学博士后</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                            <span class="flex items-center space-x-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                                </svg>
+                                <span>科普讲座</span>
+                            </span>
+                        </div>
+                        <button class="text-primary hover:text-primary/80 font-semibold text-sm">查看详情</button>
+                    </div>
+                </div>
+
+                <div
+                    class="expert-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-br from-secondary to-cyan-400 rounded-2xl flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+                            李
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-dark mb-1">李大鹏</h3>
+                            <p class="text-secondary text-sm font-semibold mb-2">物理学教授</p>
+                            <p class="text-gray-600 text-sm line-clamp-3">长期从事物理学研究与科普工作，致力于将复杂的物理知识转化为通俗易懂的科普内容</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                            <span class="flex items-center space-x-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                <span>科普视频</span>
+                            </span>
+                        </div>
+                        <button class="text-secondary hover:text-secondary/80 font-semibold text-sm">查看详情</button>
+                    </div>
+                </div>
+
+                <div
+                    class="expert-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-br from-accent to-orange-400 rounded-2xl flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+                            张
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-dark mb-1">张明华</h3>
+                            <p class="text-accent text-sm font-semibold mb-2">生物科学研究员</p>
+                            <p class="text-gray-600 text-sm line-clamp-3">专注于生物多样性保护与科普教育，多次参与国家级科普活动策划与执行</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                            <span class="flex items-center space-x-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <span>科普文章</span>
+                            </span>
+                        </div>
+                        <button class="text-accent hover:text-accent/80 font-semibold text-sm">查看详情</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="support" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span
+                    class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">活动支持</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-dark mb-4">全方位活动支持</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">提供工具支持与供需对接服务，助力科普活动顺利开展</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div
+                    class="support-card group bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 border border-blue-100 hover:border-primary/30 hover:shadow-xl transition-all duration-300">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-primary to-blue-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark mb-3">工具支持</h3>
+                    <p class="text-gray-600 mb-6">提供问卷调查、活动报名、数据统计等专业工具，支持科普活动全流程管理</p>
+                    <ul class="space-y-2 text-gray-600 mb-6">
+                        <li class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>问卷星在线调查工具</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>活动报名管理系统</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>数据统计分析平台</span>
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="inline-flex items-center text-primary font-semibold group-hover:translate-x-2 transition-transform">
+                        使用工具
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div
+                    class="support-card group bg-gradient-to-br from-cyan-50 to-white rounded-2xl p-8 border border-cyan-100 hover:border-secondary/30 hover:shadow-xl transition-all duration-300">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-secondary to-cyan-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark mb-3">供需对接</h3>
+                    <p class="text-gray-600 mb-6">连接科普活动供需双方，提供精准匹配服务，促进科普资源高效配置</p>
+                    <ul class="space-y-2 text-gray-600 mb-6">
+                        <li class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>科普资源发布平台</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>需求信息发布系统</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>智能匹配推荐服务</span>
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="inline-flex items-center text-secondary font-semibold group-hover:translate-x-2 transition-transform">
+                        发布需求
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gradient-to-br from-primary via-blue-600 to-secondary relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">加入知行驿站</h2>
+            <p class="text-xl text-white/90 mb-10">成为科普服务提供者，共同推动科普事业发展</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                    class="bg-white text-primary px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-white/30 transition-all transform hover:-translate-y-1">
+                    立即注册
+                </button>
+                <button
+                    class="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-full font-semibold text-lg border-2 border-white/30 hover:bg-white/30 transition-all">
+                    了解更多
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold">知行驿站</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">汇聚科普资源，连接供需双方，提供全方位科普活动服务支持</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-green-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.
